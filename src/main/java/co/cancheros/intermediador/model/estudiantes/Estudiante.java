@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONObject;
 
-@Entity
+//@Entity
 public class Estudiante {
 
 	@Id
@@ -18,19 +18,19 @@ public class Estudiante {
 	long id;
 	String nombres;
 	String apellidos;
-	String codigoUniversidad;
+	String correo;
 	
 	public Estudiante( ) {
 		super();
-		this.nombres = "";
-		this.apellidos = "";
-		this.codigoUniversidad = "";
+		this.nombres = null;
+		this.apellidos = null;
+		this.correo = null;
 	}
 	public Estudiante( String nombres, String apellidos, String codigoUniversidad) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
-		this.codigoUniversidad = codigoUniversidad;
+		this.correo = correo;
 	}
 	public long getId() {
 		return id;
@@ -41,8 +41,8 @@ public class Estudiante {
 	public String getApellidos() {
 		return apellidos;
 	}
-	public String getCodigoUniversidad() {
-		return codigoUniversidad;
+	public String getCorreo() {
+		return correo;
 	}
 	public void setId(long id) {
 		this.id = id;
@@ -53,8 +53,8 @@ public class Estudiante {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public void setCodigoUniversidad(String codigoUniversidad) {
-		this.codigoUniversidad = codigoUniversidad;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	
 	public JSONObject toJSON() throws Exception {
@@ -62,6 +62,7 @@ public class Estudiante {
 		japlicacion.put("id", getId());
 		japlicacion.put("nombres", getNombres());
 		japlicacion.put("apellidos", getApellidos());
+		japlicacion.put("correo", getCorreo());
 		return japlicacion;
 	}
 	

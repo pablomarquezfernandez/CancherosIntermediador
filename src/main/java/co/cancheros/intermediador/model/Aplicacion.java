@@ -1,78 +1,83 @@
 package co.cancheros.intermediador.model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONObject;
 
-import co.cancheros.intermediador.model.estudiantes.Estudiante;
+import co.cancheros.intermediador.model.estudiantes.Grupo;
+import co.cancheros.intermediador.model.estudiantes.GrupoRepository;
 
 @Entity
 public class Aplicacion {
 
+	public static final Integer ESTADO_ACTIVO = 1;
+	public static final Integer ESTADO_INACTIVO = 2;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	String numeroGrupo;
+	String nombre;
 	Integer tipo;
 	
-	@OneToMany
-	List<Estudiante>estudiantes = new ArrayList<Estudiante>();
-
+	
+//	@Autowired
+//	GrupoRepository grupoRepository;
+	@OneToOne
+	Grupo grupo;
+	
+	Integer estado;
+	
+	
 	public Aplicacion() {
 		super();
 		this.id = null;
-		this.numeroGrupo = "";
-		this.tipo = -1;
-	}
-	public Aplicacion(Integer id, String numeroGrupo, Integer tipo, List<Estudiante> estudiantes) {
-		super();
-		this.id = null;
-		this.numeroGrupo = numeroGrupo;
-		this.tipo = tipo;
-		this.estudiantes = estudiantes;
-	}
-
-
-	public Aplicacion( String numeroGrupo, Integer tipo) {
-		this.numeroGrupo = numeroGrupo;
-		this.tipo = tipo;
+		this.nombre = null;;
+		this.tipo = null;;
+		this.estado = ESTADO_ACTIVO;
 	}
 	
 	
 	public Long getId() {
 		return id;
 	}
-	public String getNumeroGrupo() {
-		return numeroGrupo;
+	public String getNombre() {
+		return nombre;
 	}
 	public Integer getTipo() {
 		return tipo;
 	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
+	public void setValoresInsertar(String nombre, Integer tipo) {
+		this.nombre = nombre;
+		this.tipo = tipo;
+	}
 
 
-	public List<Estudiante> getEstudiantes() {
-		return estudiantes;
-	}
-	public void setEstudiantes(List<Estudiante> estudiantes) {
-		this.estudiantes = estudiantes;
-	}
-	
-	
 	public JSONObject toJSON() throws Exception {
 		JSONObject japlicacion = new JSONObject();
 		japlicacion.put("id", getId());
-		japlicacion.put("numeroGrupo", getNumeroGrupo());
+		japlicacion.put("nombre", getNombre());
 		japlicacion.put("tipo", getTipo());
 		return japlicacion;
 	}

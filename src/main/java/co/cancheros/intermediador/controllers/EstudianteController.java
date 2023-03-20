@@ -16,25 +16,24 @@ import co.cancheros.intermediador.model.Aplicacion;
 import co.cancheros.intermediador.model.AplicacionRepository;
 import co.cancheros.intermediador.model.estudiantes.Estudiante;
 
-@RestController
+//@RestController
 public class EstudianteController {
 
+
+	
 //	@Autowired
-//	EstudianteController estudianteRepository;
-	
-	@Autowired
-	AplicacionRepository aplicacionRepository;
-	
-	
-	@CrossOrigin
-	@GetMapping(value = "/estudiantes/{idAplicacion}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public  ResponseEntity<String> aplicaciones(@PathVariable Long idAplicacion) throws Exception{
-//		Aplicacion aplicacion = new Aplicacion("1111", 1);
-		Optional<Aplicacion> aplicacionOp = aplicacionRepository.findById(idAplicacion);
-		Aplicacion aplicacion = aplicacionOp.get();
-		Iterable<Estudiante>estudiantes = aplicacion.getEstudiantes();
-		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		return  new ResponseEntity<String>( Estudiante.toJSONArray(estudiantes).toString(), responseHeaders, HttpStatus.OK );
-	}
+//	AplicacionRepository aplicacionRepository;
+//	
+//	
+//	@CrossOrigin
+//	@GetMapping(value = "/estudiantes/{idAplicacion}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public  ResponseEntity<String> aplicaciones(@PathVariable Long idAplicacion) throws Exception{
+////		Aplicacion aplicacion = new Aplicacion("1111", 1);
+//		Optional<Aplicacion> aplicacionOp = aplicacionRepository.findById(idAplicacion);
+//		Aplicacion aplicacion = aplicacionOp.get();
+//		Iterable<Estudiante>estudiantes = aplicacion.getEstudiantes();
+//		
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		return  new ResponseEntity<String>( Estudiante.toJSONArray(estudiantes).toString(), responseHeaders, HttpStatus.OK );
+//	}
 }
