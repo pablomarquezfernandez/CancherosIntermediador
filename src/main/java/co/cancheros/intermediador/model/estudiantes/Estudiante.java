@@ -6,19 +6,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONObject;
 
-//@Entity
+@Entity
 public class Estudiante {
 
+	
+	public static final Integer ESTADO_ACTIVO = 1;
+	public static final Integer ESTADO_INACTIVO = 2;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
+	Long id;
+	
+	
 	String nombres;
 	String apellidos;
 	String correo;
+	Integer estado;
+	
+	@ManyToOne()
+    @JoinColumn(name = "grupo_id")
+	Grupo grupo;
 	
 	public Estudiante( ) {
 		super();
@@ -26,13 +39,13 @@ public class Estudiante {
 		this.apellidos = null;
 		this.correo = null;
 	}
-	public Estudiante( String nombres, String apellidos, String codigoUniversidad) {
+	public Estudiante( String nombres, String apellidos, String correo) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.correo = correo;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	public String getNombres() {
@@ -44,7 +57,7 @@ public class Estudiante {
 	public String getCorreo() {
 		return correo;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setNombres(String nombres) {
@@ -55,6 +68,21 @@ public class Estudiante {
 	}
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+	
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+	public Grupo getGrupo() {
+		return grupo;
+	}
+	
+	public void setValores( String nombres, String apellidos, String correo, Grupo grupo) {
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.correo = correo;
+		this.grupo = grupo;
+		this.estado = ESTADO_ACTIVO;
 	}
 	
 	public JSONObject toJSON() throws Exception {

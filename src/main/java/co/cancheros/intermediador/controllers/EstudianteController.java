@@ -1,6 +1,6 @@
 package co.cancheros.intermediador.controllers;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -12,28 +12,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.cancheros.intermediador.model.Aplicacion;
-import co.cancheros.intermediador.model.AplicacionRepository;
 import co.cancheros.intermediador.model.estudiantes.Estudiante;
+import co.cancheros.intermediador.model.estudiantes.Grupo;
+import co.cancheros.intermediador.model.estudiantes.GrupoRepository;
 
-//@RestController
+@RestController
 public class EstudianteController {
 
 
+	@Autowired
+	GrupoRepository grupoRepository;
 	
-//	@Autowired
-//	AplicacionRepository aplicacionRepository;
-//	
-//	
-//	@CrossOrigin
-//	@GetMapping(value = "/estudiantes/{idAplicacion}", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public  ResponseEntity<String> aplicaciones(@PathVariable Long idAplicacion) throws Exception{
-////		Aplicacion aplicacion = new Aplicacion("1111", 1);
-//		Optional<Aplicacion> aplicacionOp = aplicacionRepository.findById(idAplicacion);
-//		Aplicacion aplicacion = aplicacionOp.get();
-//		Iterable<Estudiante>estudiantes = aplicacion.getEstudiantes();
-//		
-//		HttpHeaders responseHeaders = new HttpHeaders();
-//		return  new ResponseEntity<String>( Estudiante.toJSONArray(estudiantes).toString(), responseHeaders, HttpStatus.OK );
-//	}
+	@CrossOrigin
+	@GetMapping(value = "/grupo/{idGrupo}/estudiantes", produces = MediaType.APPLICATION_JSON_VALUE)
+	public  ResponseEntity<String> getEstudiante(  @PathVariable Long idGrupo  ) throws Exception{
+		Grupo grupo = grupoRepository.findById((long) idGrupo).get();
+		List<Estudiante>estudiantes = grupo.getEstudiantes();
+		HttpHeaders responseHeaders = new HttpHeaders();
+		return  new ResponseEntity<String>( Estudiante.toJSONArray(estudiantes).toString(), responseHeaders, HttpStatus.OK );
+	}
+	
+	
+
 }

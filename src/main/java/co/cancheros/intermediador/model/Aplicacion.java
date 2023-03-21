@@ -8,13 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONObject;
 
 import co.cancheros.intermediador.model.estudiantes.Grupo;
-import co.cancheros.intermediador.model.estudiantes.GrupoRepository;
 
 @Entity
 public class Aplicacion {
@@ -72,7 +69,14 @@ public class Aplicacion {
 		this.nombre = nombre;
 		this.tipo = tipo;
 	}
-
+	
+	
+	public void setGrupo( Grupo grupo ) {
+		this.grupo = grupo;
+	}
+	public Grupo getGrupo(  ) {
+		return this.grupo;
+	}
 
 	public JSONObject toJSON() throws Exception {
 		JSONObject japlicacion = new JSONObject();
