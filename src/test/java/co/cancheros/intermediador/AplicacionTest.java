@@ -1,6 +1,5 @@
 package co.cancheros.intermediador;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Iterator;
@@ -30,15 +29,15 @@ public class AplicacionTest {
 			}
 			
 			Aplicacion aplicacion = new Aplicacion();
-			aplicacion.setValoresInsertar("Grupo 1", 1);
+			aplicacion.setValoresInsertar("Grupo 1 CLASE", 1);
 			aplicacionRepository.save( aplicacion );
 			
 			aplicacion = new Aplicacion();
-			aplicacion.setValoresInsertar("Grupo 2", 2);
+			aplicacion.setValoresInsertar("Grupo 2 CLASE", 2);
 			aplicacionRepository.save( aplicacion );
 			
 			aplicacion = new Aplicacion();
-			aplicacion.setValoresInsertar("Grupo 3", 2);
+			aplicacion.setValoresInsertar("Grupo 3 CLASE", 2);
 			aplicacionRepository.save( aplicacion );
 			
 			
